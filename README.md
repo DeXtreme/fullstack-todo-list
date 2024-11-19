@@ -3,38 +3,45 @@
     <img src="https://user-images.githubusercontent.com/62269745/174906068-aad23112-20fe-4ec8-877f-3ee1d9ec0a69.png#gh-dark-mode-only" width="40%">
 </p>
 
-# Full-Stack Todo List Application
+## Full-Stack Todo List Application
 
 This repository hosts a full-stack Todo List application designed to allow users to create, manage, and organize their tasks efficiently. The application features a React-based frontend and a Node.js backend, utilizing MongoDB for data persistence.
 
-## Technologies Used
+## Setup and Deployment
+### Requirements
+- Docker
+- Docker-Compose
 
-- **Frontend**: React, Material-UI
-- **Backend**: Node.js, Express
-- **Database**: MongoDB
-- **Other Tools**: Vite, React Toastify, Lucide Icons
+### Steps
+1. Clone the repository
+   
+   ```bash
+   git clone https://github.com/DeXtreme/fullstack-todo-list.git
+   ```
+2. In the folder, run the following commands to build the frontend,backend and database containers
+   ```bash
+   docker-compose build
+   ```
+3. Start all the containers
+   ```bash
+   docker-compose up
+   ```
+4. Access the frontend by visiting `http://localhost/`
 
-## Project Structure
+5. To stop the containers, run the following  command
+   ```bash
+   docker-compose down
+   ```
 
-The project is divided into two main parts:
-- **Frontend**: Located in the `frontend/` directory with its own [README](frontend/README.md).
-- **Backend**: Located in the `backend/` directory with its own [README](backend/README.md).
+### Network and Security Configurations
+The frontend container binds to port 80(http) on the host. The backend container binds to port 4000 on the host. All the containers run on the same bridge network to allow commnication between the backend and database containers. The database container does not bind to ports on the host to prevent direct access. All required environment variables and build arguments for the container have been set in the docker-compose.yml file, namely:
+- **BACKEND_URL** : The backend url the frontend should use
+- **DB_HOST** : The hostname of the database
+- **DB_NAME** : The database name
+- **DB_PORT** : The port the database is using
 
-## Features
-
-- Create, view, update, and delete todo items.
-- Organize tasks with tags/categories.
-- Responsive user interface adaptable to different screen sizes.
-- Real-time updates without page reloads.
-
-## Contributing
-
-Contributions are welcome! See the specific README files in the `frontend/` and `backend/` directories for more details on contributing.
-
-## Live Demo
-
-<h4 align="left">Live Preview is available at https://fullstack-todolist-1.onrender.com/</h4>
-
-## Snapshots
-
-<img src="./Frontend/src/assets/home-snapshot.png" alt="home page"/>
+### Troubleshooting Guide
+If you encounter any issues building or starting the containers:
+1. Make sure you have a working internet connection so the container images can be downloaded
+2. Update your version of Docker and Docker-Compose
+3. Check the Docker daemon and make sure it's running correctly 
