@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  frontend:
+    build:
+      context: ./Frontend
+      args:
+       - BACKEND_URL=localhost:4000
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+    - backend
+  
+  backend:
+    build:
+      context: ./Backend
+    restart: always
+    ports:
+      - "4000:3000"
+    environment:
+      DB_HOST: database
+      DB_NAME: todos
+      DB_PORT: 27017
+    depends_on:
+      - database
+  
+  database:
+    image:  mongo:noble
+    restart: always
+    volumes:
+      - mongo_data:/data/
+    environment:
+      MONGO_INITDB_DATABASE: todos
+
+
+volumes:
+  mongo_data:
+  
+  
