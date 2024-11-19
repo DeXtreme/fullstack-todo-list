@@ -29,10 +29,10 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB Connection URI
-const MONGO_URI = 'mongodb://127.0.0.1:27017';
+const MONGO_URI = `mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}`;
 //const MONGO_URI = 'mongodb://mongo-shared-dev:fikTpih4U2!@20.218.241.192:27017/?directConnection=true&appName=mongosh+1.8.2&authMechanism=DEFAULT';
 
-const dbname = 'todos';
+const dbname = process.env.DB_NAME;
 
 // Connect to MongoDB
 mongoose
@@ -99,13 +99,13 @@ app.post('/api/todos', async (req, res) => {
   }
 });
 // Route: Fetch all users
-app.get('/api/gettodos', async (req, res) => {
+app.get('/api/todos', async (req, res) => {
 
   try {
 
-    const todoList = await Todos.find();
+    const todos = await Todos.find();
 
-    return res.status(201).send({ todoList });
+    return res.status(201).send({ todos });
   } catch (error) {
     // if (error.errors.title)
     //   return res.status(400).send({ message: "the Title field is required" });
