@@ -8,7 +8,8 @@ const useGetTodos = (setTodos, setNumOfPages, setPage) => {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `https://fullstack-todolist-upnv.onrender.com/todos?page=${page}&limit=${limit}`
+        //`https://fullstack-todolist-upnv.onrender.com/todos?page=${page}&limit=${limit}`
+        `http://${import.meta.env.VITE_BACKEND_URL}/api/todos?page=${page}&limit=${limit}`
       );
       const data = await response.json();
       setTodos(data.todos);

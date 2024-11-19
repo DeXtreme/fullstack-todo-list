@@ -12,7 +12,7 @@ const useAddTodos = (fetchTodos, page, limit, setNewTodo) => {
     try {
       setIsLoading(true);
       const response = await fetch(
-        "http://localhost:3000/api/todos",
+        `http://${import.meta.env.VITE_BACKEND_URL}/api/todos`,
         {
           method: "POST",
           headers: {
