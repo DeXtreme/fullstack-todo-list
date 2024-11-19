@@ -28,10 +28,21 @@ This repository hosts a full-stack Todo List application designed to allow users
    ```
 4. Access the frontend by visiting `http://localhost/`
 
-5. To stop the containers, run the following  command
+6. To stop the containers, run the following  command
    ```bash
    docker-compose down
    ```
+
+### Testing
+You test that the container are running properly by running the `test.sh` bash script. The script queries the frontend and backend containers and checks the response codes
+1. Make the script executable
+```bash
+chmod +x ./test.sh
+```
+2. Run the script
+```bash
+./test.sh
+```
 
 ### Network and Security Configurations
 The frontend container binds to port 80(http) on the host. The backend container binds to port 4000 on the host. All the containers run on the same bridge network to allow commnication between the backend and database containers. The database container does not bind to ports on the host to prevent direct access. All required environment variables and build arguments for the container have been set in the docker-compose.yml file, namely:
